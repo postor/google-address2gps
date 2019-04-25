@@ -11,27 +11,25 @@ yarn
 yarn start
 ```
 
-open http://localhost:3000/?address=your_location
+open http://localhost:3005/?address=your_location
 
-example result for http://localhost:3000/?address=central%20park
+example result for http://localhost:3005/?address=central%20park
 ```
 {  
-   "address":"central park",
-   "data":{  
-      "OK":true,
-      "list":[  
-         {  
-            "address":"Central Park, New York, NY, USA",
-            "location":"40.782865,-73.965355",
-            "types":"establishment, park, point_of_interest"
-         }
-      ]
-   }
+  "address":"central park",
+  "OK":true,
+  "list":[  
+    {  
+      "address":"Central Park, New York, NY, USA",
+      "location":"40.782865,-73.965355",
+      "types":"establishment, park, point_of_interest"
+    }
+  ]
 }
 ```
 
 # docker usage
 
 ```
-docker run -p 3000:3000 --rm postor/google-address2gps
+docker run -p 3005:3005 --rm postor/google-address2gps
 ```
