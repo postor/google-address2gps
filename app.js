@@ -2,10 +2,10 @@ const fs = require('fs')
 const express = require('express')
 const puppeteer = require('puppeteer')
 const app = express()
-const port = 3000;
+const port = 3005;
 
 (async () => {
-  const browser = await puppeteer.launch()
+  const browser = await puppeteer.launch({ devtools: true })
   const page = await browser.newPage()
 
   process.on('uncaughtException', async (err, origin) => {
@@ -44,12 +44,18 @@ const port = 3000;
     }, address)
 
     //点击并等待响应
-    await Promise.all([
-      $submit.click(),
-      page.waitForResponse((response) => {
-        return response.url().includes('https://maps.googleapis.com/maps/api/js/GeocodeService.Search')
-      })
-    ])
+    try {
+      await Promise.all([
+        $submit.click(),
+        page.waitForResponse((response) => {
+          return response.url().includes('https://maps.googleapis.com/maps/api/js/GeocodeService.Search')
+        })
+      ])
+    } catch (e) {
+      busy = false
+      res.json({ error: 'over time limit' })
+      return
+    }
     const data = await page.evaluate(() => {
       const OK = document.querySelector('#status-display-div').textContent.includes('OK')
       if (!OK) {
@@ -77,8 +83,8 @@ const port = 3000;
 
     busy = false
     res.json({
+      ...data,
       address,
-      data,
     })
   })
 
