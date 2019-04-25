@@ -47,12 +47,7 @@ const port = 3000;
     await Promise.all([
       $submit.click(),
       page.waitForResponse((response) => {
-        if (response.url().includes('https://maps.googleapis.com/maps/api/js/GeocodeService.Search')) {
-          console.log(`found:${response.url()}`)
-          return true
-        }
-        console.log(`notmatch:${response.url()}`)
-        return false
+        return response.url().includes('https://maps.googleapis.com/maps/api/js/GeocodeService.Search')
       })
     ])
     const data = await page.evaluate(() => {
