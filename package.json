@@ -1,0 +1,15 @@
+{
+  "name": "google-address2gps",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:postor/google-address2gps.git",
+  "author": "josh <postor@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "puppeteer": "^1.14.0"
+  }
+}
