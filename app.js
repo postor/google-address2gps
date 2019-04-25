@@ -70,8 +70,8 @@ const port = 3005;
           let types = ps[2].textContent.split(':')[1].trim()
           list.push({
             address,
-            location,
-            types
+            location: location.split(',').map(x => parseFloat(x)),
+            types:types.split(',')
           })
         })
 
