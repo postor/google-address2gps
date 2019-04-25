@@ -5,7 +5,9 @@ const app = express()
 const port = 3005;
 
 (async () => {
-  const browser = await puppeteer.launch()
+  const browser = await puppeteer.launch(process.env.NO_SANDBOX?{
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  }:{})
   const page = await browser.newPage()
 
   process.on('uncaughtException', async (err, origin) => {
