@@ -5,7 +5,7 @@ const app = express()
 const port = 3005;
 
 (async () => {
-  const browser = await puppeteer.launch({ devtools: true })
+  const browser = await puppeteer.launch()
   const page = await browser.newPage()
 
   process.on('uncaughtException', async (err, origin) => {
